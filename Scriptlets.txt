@@ -1,0 +1,158 @@
+Exercise 2 – Authoring a Flow to Create and Display a Variable
+
+/* This scriptlet creates a variable named myValue then assigns it as a flow variable named greeting to the global context.
+The Resolved step displays the flow variable (${greeting})
+*/ 
+
+var myValue = "Hello World!";
+scriptletContext.putGlobal("greeting", myValue);
+==============================================================
+Exercise 3 – Authoring a Flow to Assign an Input to a Flow Variable
+
+/* This scriptlet assigns the value entered for input1 to myValue then assigns it as a flow variable named greeting to the global context.
+The Resolved step displays the flow variable (${greeting})
+*/
+
+var myValue = input1;
+scriptletContext.putGlobal("greeting", myValue);
+==============================================================
+Exercise 4 – Authoring a Flow to Access the Return Code and Return Result
+
+/* This scriptlet assigns the output returnCode to a variable named code, and the returnResult (standard output) of the operation to a variable named data. It then writes Code and stdOut as global flow variables and displays the result in the Resolved step
+*/
+
+code = parseInt(scriptletRawResult['returnCode']);
+data = scriptletRawResult['returnResult'];
+scriptletContext.putGlobal("Code", code.toString());
+scriptletContext.putGlobal("stdOut",data);
+==============================================================
+Exercise 5 – Authoring a Flow to Set the Step Result
+
+/* This scriptlet uses the scriptletResult method to set the step result
+to the value of input1 input; The Display Message in turn displays
+the value of its message input, which is set to Previous Step Result.
+*/
+
+scriptletResult = input1;
+==============================================================
+Exercise 6 – Authoring a Flow to Set a Value to the Global and Local Context
+
+/* This scriptlet retrieves the returnResult from the global context and host from the local context and stores them in the data and target variables respectively. These are in turn written to the global context as pingOutput and hostName, which are displayed in the Resolved Step.
+The returnResult is placed in the global context as a Result, defined in the Results tab.
+*/
+
+data  = scriptletContext.get("returnResult");
+target = scriptletContext.getLocal("host");
+scriptletContext.putGlobal("pingOutput",data);
+scriptletContext.put("hostName", target);
+==============================================================
+Exercise 7 – Authoring a Flow to Capture User ID and Run ID
+
+/* This scriptlet assigns the execution_userid to a variable named user and the Run_ID to a variable named runID. Those values are then written to the global context as User and RunID. These are two useful pieces of information that are difficult to obtain without using a scriptlet.
+*/
+
+user = scriptletContext.get("execution_userid");
+runID = scriptletContext.get("run_id");
+scriptletContext.putGlobal("User",user);
+scriptletContext.putGlobal("RunID",runID);
+==============================================================
+Exercise 8 – Authoring a Flow to Perform a Simple Sort
+
+/* This scriptlet creates an unsorted array of numbers stored in myValues, then sorts the array. The sorted array is written to the global context and displayed in the Resolved step.
+*/
+
+var myValues = ["3", "1", "5", "2", "4"];
+myValues.sort();
+scriptletContext.putGlobal("mySortedArray",myValues);
+==============================================================
+Exercise 9 – Authoring a Flow to Sort a List
+
+/*This scriptlet takes a list of numbers from an input and stores in a myValues variable. It then splits the list into an array and sorts the array. The mySortedArray variable is written to the global context then displayed in the Resolved step.
+*/
+
+var myValues = field1.split(",");
+myValues.sort();
+scriptletContext.putGlobal("mySortedArray",myValues);
+==============================================================
+Exercise 10 – Authoring a Flow to Sort Text Inputs
+
+/*This step prompts for four text strings and stores them in field1 through field4. It then sorts the inputs, stored in myValue, and displays the sorted list in the Resolved step.*/
+
+var myValues = [field1, field2, field3, field4];
+myValues.sort();
+scriptletContext.putGlobal("mySortedArray",myValues);
+==============================================================
+Exercise 11 – Authoring a Flow to Use Regular Expressions
+
+/* This scriptlet uses a global regular expression to return all instances in ipconfig output (stdOut) that match the IP address expression. The IP addresses are displayed in the Resolved step. To return just the first instance, remove "g" from the regular expression */
+
+stdOut = scriptletContext.get("stdOut");
+IP = stdOut.match(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g);
+scriptletContext.putGlobal("IP",IP); 
+==============================================================
+Exercise 12 – Authoring a Flow to Replace Matching Strings
+
+/* This flow prompts for two inputs, input1 and replaceWith. When you run the flow, the value if input1 is replaced with the value of replaceWith. A new flow variable is created named newString, which is written to the global context and then displayed in the Resolved step.
+*/
+
+newString = input1.replace(input1,replaceWith);
+scriptletContext.putGlobal("newString",newString);
+==============================================================
+Exercise 13 – Authoring a Flow to Use Global Search and Replace
+
+/* This scriptlet does a global search-and-replace on the word COMPANY in the str flow variable. It then writes the modified text to the global context as newString, which is displayed in the Resolved step.
+*/
+
+var str = input1;
+newString = str.replace(/company/gi,input2);
+scriptletContext.putGlobal("str",str);
+scriptletContext.putGlobal("newString",newString);
+==============================================================
+Exercise 14 – Authoring a Flow to Select a Response
+
+/* This scriptlet sets the step response as defined in field1, which prompts the user to select from one of four available responses.
+*/
+
+scriptletResponse = field1;
+==============================================================
+Exercise 15 – Authoring a Flow to Filter a Result
+
+scriptletResult = scriptletInput.match(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/);
+==============================================================
+Exercise 16 – Authoring a Flow to Use a System Evaluator
+
+/*
+   Check whether input is a number
+*/
+if(scriptletInput.length >0) {
+  if(!isNaN(scriptletInput))
+  matchRanges.setMatches(true);
+}
+        matchRanges.addRange(0,scriptletInput.length);
+==============================================================
+Exercise 17 – Authoring a Flow to Apply a Response Rule
+
+/*
+   Network 192
+*/
+if(scriptletInput.length >0) {
+   if (scriptletInput.substring(0,3) == "192") matchRanges.setMatches(true);
+}
+matchRanges.addRange(0,ScriptletInput.length);
+
+/*
+   Network 172
+*/
+if(scriptletInput.length >0) {
+   if (scriptletInput.substring(0,3) == "172") matchRanges.setMatches(true);
+}
+matchRanges.addRange(0,ScriptletInput.length);
+==============================================================
+Exercise 18 – Authoring a Flow to Save Scriptlets and Reuse a Saved Scriptlet
+
+//scripletInput = 26000000;
+if (scriptletInput.length == 0) scriptletResult = 0
+else scriptletResult =
+java.land.Math.round(java.lang.Double.parseDouble(scriptletInput)/1024)
+scriptletContext.put("scriptletResult",scriptletResult);
+==============================================================

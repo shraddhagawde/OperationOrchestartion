@@ -1,0 +1,6 @@
+DATA	returnResult
+HEADER	header
+LOGIN_INDEX	str(header.split(',').index(login_header))
+PASSWORD_INDEX	str(header.split(',').index(password_header))
+EMAIL_INDEX	str(header.split(',').index(email_header))
+NAME_INDEX	str(header.split(',').index(name_header))

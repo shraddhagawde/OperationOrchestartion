@@ -1,0 +1,7 @@
+EXCEL_FILE_NAME -> file_path
+WORKSHEET_NAME -> 'products'
+HEADER_DATA -> 'Category ID,Category Name,Product ID,Product Name,Product Price,'+','.join(['Color Code'] * 8)
+ROW_DATA -> category_id+','+category_name+','+product_id+','+product_name+','+product_price+','+color_codes
+COLUMN_DELIMITER -> ','
+ROWS_DELIMITER -> '|'
+OVERWRITE_DATA -> 'false'

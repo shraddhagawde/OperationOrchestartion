@@ -1,0 +1,7 @@
+
+IN	data.split("|")
+USERNAME	row.split(",")[int(login_index)]
+PASSWORD	row.split(",")[int(password_index)]
+FIRST_NAME	row.split(",")[int(name_index)].split()[0]
+LAST_NAME	row.split(",")[int(name_index)].split()[-1]
+EMAIL	row.split(",")[int(email_index)]

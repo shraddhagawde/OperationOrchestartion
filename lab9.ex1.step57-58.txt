@@ -1,0 +1,19 @@
+57.	For the json_path_query operations, use the inputs and outputs as follows:
+get_product_name
+inputs -> JSON_OBJECT -> json
+inputs -> JSON_PATH -> '$.*.products[?(@.productId == '+product_id+')].productName'
+outputs -> product_name -> return_result[2:-2]
+
+get_product_price
+inputs -> JSON_OBJECT -> json
+inputs -> JSON_PATH -> '$.*.products[?(@.productId == '+product_id+')].price'
+outputs -> product_price -> return_result[1:-1]
+
+get_color_codes
+inputs -> JSON_OBJECT -> json
+inputs -> JSON_PATH -> '$.*.products[?(@.productId == '+product_id+')].colors.*.code'
+outputs -> color_codes -> return_result[1:-1]
+
+58.	For add_product step, use these inputs:
+FILE_PATH -> file_path
+TEXT -> "|"+"|".join([category_id.rjust(13),category_name.ljust(15),product_id.rjust(12),product_name.ljust(51),product_price.rjust(15),color_codes.ljust(60)])+"|\n"

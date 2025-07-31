@@ -1,0 +1,6 @@
+{"Emp":[
+{"Name": "John", "Company": "MicroFocus", "Country": "United States"},
+{"Name": "Suraj", "Company": "Microsoft", "Country": "India"},
+{"Name": "Sharon", "Company": "Oracle", "Country": "France"}
+]
+}
