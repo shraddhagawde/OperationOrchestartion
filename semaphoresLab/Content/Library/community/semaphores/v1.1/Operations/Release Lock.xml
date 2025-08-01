@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="3181eb7a-c791-4273-9412-15971ebc5964">
+  <descriptionCdata><![CDATA[3181eb7a-c791-4273-9412-15971ebc5964.description=Releases a lock with an id given by the value of the lockId input.\n\n<pre>\nInputs\:\n   lockId - the id of the lock, maximum 255 characters.\n\nResponses\:\n   success - the only response returned.\n\nResults\:\n   there are no results.\n\nNotes\:\n1) The operation only releases locks acquired by the current run. \n   It cannot release another run's locks.\n\n2) The operation succeeds whether or not there is a lock held \n   by the current run with the supplied id.\n</pre>
+]]></descriptionCdata>
+  <annotation>3181eb7a-c791-4273-9412-15971ebc5964.description</annotation>
+  <name>Release Lock</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="6dda9ece-706c-4da1-bb6b-7e9b26e265ff">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>lockId</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="8ad38f28-a167-4ce8-a372-f47312dc09f5">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Lock_Id</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${lockId}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="7a2ad975-36f4-4a1c-895f-7c9c3639a01b">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="1a9b789f-e9ed-4e55-b0c3-f462093da36d">
+    <annotation></annotation>
+    <name>FailureMessage</name>
+    <fieldName>FailureMessage</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="c9ca0dd6-a7a7-49c9-9bcf-809534e7bf65">
+    <baseIcon>wrench.png</baseIcon>
+    <basePath>Utilities/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="3b866fd2-15f8-405d-b7de-7cdafc3cbc47">
+        <baseIcon>lock_open.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>2fc0811e-1a21-4dd3-9881-d9900ffe7079</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>

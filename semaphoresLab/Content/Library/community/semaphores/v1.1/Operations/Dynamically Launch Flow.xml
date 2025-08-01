@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="6e421444-bbd5-4592-9990-fc0f94f55609">
+  <descriptionCdata><![CDATA[6e421444-bbd5-4592-9990-fc0f94f55609.description=<pre>\nLaunches a specified flow immediately. See the notes below for more details.\n\nInputs\:\n    centralServer - The host running the Central service.\nDefault value\: localhost\n    centralUsername - The username to use when connecting to the Central service.\n    centralPassword - The password to use when connecting to the Central service.\n    centralProtocol - The protocol used to communicate to the Central service.\nDefault value\: http\nValid values\: http, https \n    centralPort - The port the Central service is running on.\nDefault\: 8080\nValid values\: 8080, 8443 \n    authType - The type of authentication used by this operation when trying to execute the request on the target server.\nValid values\: basic, form, springForm, digest, ntlm, kerberos, anonymous (no authentication).\nDefault value\: anonymous - authentication not used when executing the request.\n    proxy - The proxy server used to access the Central host.\n    proxyPort - The proxy server port.\nDefault value\: 8080\n    proxyUsername - The user name used when connecting to the proxy.\n    proxyPassword - The proxy server password associated with the "proxyUsername" input value.\n    trustAllRoots - Specifies whether to enable weak security over SSL. An SSL certificate is trusted even if no trusted certification authority issued it.\nValid values\: true, false\nDefault value\: true\n    keystore - The location of the KeyStore file - a URL or the local path to it. This input is empty if no HTTPS client authentication is used. The default value will be provided if "trustAllRoots" is "false".\nDefault\: "OO_Home"/java/lib/security/cacerts\n    keystorePassword - The password associated with the KeyStore file. If "trustAllRoots" is "false" and "keystore" is empty, "keystorePassword" default will be supplied.\nDefault value\: changeit\n    trustKeystore - The location of the TrustStore file - a URL or the local path to it. This input is empty if no HTTPS server authentication is used. The default value will be provided if "trustAllRoots" is "false".\nDefault\: "OO_Home"/java/lib/security/cacerts\n    trustPassword - The password associated with the TrustStore file.  If "trustAllRoots" is "false" and "trustKeystore" is empty, "trustPassword" default will be supplied.\nDefault value\: changeit\n    centralFlowPath - The path or the UUID of the flow to launch. When dealing with CloudSlang flows this input accepts also a flow namespace. \nExample 1\: 06fe8531-868b-4e79-aa7a-13a5e30a66ec\nExample 2\: Library\\Utility Operations\\Samples\\Generate Random Number.xml\n    centralFlowLaunchWaitForFlow - A boolean value indicating whether the flow should run asynchronously, returning immediately. Otherwise, the operation waits for execution to complete.\nDefault value\: false \nValid values\: false, true \n    runName - The run name of the flow to launch.\n    inputs - The list of input names (separated by delimiter) to pass to the invoked flow.\n    values - The list of input values (separated by delimiter) to pass to the invoked flow.\n    delimiter - The delimiter separating the items in lists.\nDefault value\: , (comma). \n    socketTimeout - The time to wait between two consecutive data packets received from the server, in milliseconds. The response may consist in more data packets and this value represents the maximum waiting time between any two consecutive of them. \nValid values\: This input needs a value greater than or equal to zero. A "socketTimeout" value of '0' represents an infinite timeout.\nDefault value\: 0 \n    logLevel - The level of the logs. For platform versions up to and included 10.22 the valid values are\:  DEBUG, INFO, ERROR (with INFO as a default value). For platform versions 10.50 and higher the valid values are\: STANDARD and EXTENDED (with STANDARD as a default value).\n    waitingTime - The time to wait for retrieving the triggered flow status (milliseconds). \nValid values\: This input needs a value greater than or equal to zero. A "timeout" value of '0' means that operation will not wait for triggered flow execution to complete instead will return the status immeaditely after the flow is triggered.\n\nResults\:\n    returnResult - This is the primary output. Returns "success" if the targeted flow is triggered.\n    runId - The id of the run. \n    feedUrl - The URL of the triggered execution details. \n    errorCode - The status of the triggering process. \n    status - The status of the triggered flow execution. \n    startTime - The starting time of the triggered flow execution. \n    endTime - The ending time of the triggered flow execution.\n    \n\nResponses\:\n    success - The operation completed as stated in the description.\n    failure - The operation completed unsuccessfully.\n\nNote\: \n1. If the targeted flow has specific names and values to be run with, then provide these by using "inputs" and "values" for them. \nExample\: If the "Generated Random Number" flow (found in\: Base/Library/Utility Operations/Samples) is needed to be run in Central then for "inputs" input provide\: min,max and for "values" input provide the inferior and superior limit to be used for generated number (i.e.\: 1,300).\n2. You can use KeyTool to import a SSL certificate in a KeyStore. For example, to import a certificate in the Java cacerts KeyStore, run\: keytool -import -file c\:/../"your_cert".cer -alias "your_alias" -keystore "OO_Home"/java/lib/security/cacerts -keystorepass changeit. If the KeyStore does not exist, the command tries to create a new one containing only your certificate.\n3. You can use KeyTool to create a certificate chain through the following command\: \n   keytool -genkey -dname "cn\=Mark Jones, ou\=JavaSoft, o\=Sun, c\=US" \n       -alias business -keypass kpi135 -keystore C\:\\working\\mykeystore \n       -storepass ab987c -validity 180\nThis creates a certificate chain in a new KeyStore containing only one certificate. It is useful in SSL client authentication because the KeyManager ignores any certificates not included in a certificate chain.\n4. If the value assigned to the "trustAllRoots" input is "false" and "trustKeystore" is empty, the operation tries to use the default trust store, using the password "changeit". \n5. If the authentication type is Kerberos, you might need to add an SPN (Service Principal Name) for the web server's computer account.  In order to do this, you can use ADUC (Active Directory Users and Computers) with enabled "Advanced Features". Go to the web server's computer account (example\: CN\="web_server_name",CN\=Computers,DC\=domain,DC\=com), open the Properties window and press the "Attribute Editor" tab. Check the values of the "servicePrincipalName" attribute and add your SPN if not present. For example, http\://"web_server_FQDN"\:port.\n6. Apache Tomcat is currently the only supported application server when using form-based authentication.\n7. The "socketTimeout" can be used for diagnosis purpose, when the server is up, but slowly responding. It does not represent the timeout for establishing a connection, neither the timeout for executing the operation.\n</pre>
+]]></descriptionCdata>
+  <annotation>6e421444-bbd5-4592-9990-fc0f94f55609.description</annotation>
+  <name>Dynamically Launch Flow</name>
+  <categories/>
+  <inputs>
+    <staticBinding id="e8cc0633-53bf-4b1a-aca5-00fdd17e3435">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralServer</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>localhost</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="66f3ec4c-4052-4ad6-9cfa-f666d1924192">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralUsername</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e2172f2e-3005-4e19-9a02-6d2fe962e544">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}tFQ2pnWYKQCGLnn/5LPzoA==</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="a8dea14e-e98c-43bd-bb96-2bfe273a2791">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralProtocol</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>http</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="500712ed-9008-4073-af33-97378c6e2b36">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralPort</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>8080</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="b56249dd-756f-4ed9-87cb-fa204934161d">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>authType</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>anonymous</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="5cd45b52-6ce0-4eff-9ca1-066746e66f8a">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>proxy</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2a143c3a-578c-4b8e-bbd0-8867b287c4c5">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>proxyPort</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>8080</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="22e58165-9368-428d-a8fe-0a95a1a4f6ad">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>proxyUsername</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="54ca0373-e573-4b95-bee4-59237165c916">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>proxyPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}tFQ2pnWYKQCGLnn/5LPzoA==</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e8f62d25-2b28-45df-9854-42b0aa477b42">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustAllRoots</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f5952113-cefd-4bc1-a84d-89c63271a698">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>&quot;C:\Program Files\Hewlett-Packard\Operations Orchestration\central\var\security\key.store&quot;</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="55dbcf39-0f52-4997-ab40-ac3053031c3f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keystorePassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}ZUoMreNLw6qIOyzX7g5YKw==</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="4ff09e85-0481-47ba-9097-4c3c38137764">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustKeystore</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>&quot;C:\Program Files\Hewlett-Packard\Operations Orchestration\central\var\security\client.truststore&quot;</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="c85f1936-2267-4c61-aa9b-adbc14d17545">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>ENCRYPTED</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>trustPassword</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>{OBFUSCATED}ZUoMreNLw6qIOyzX7g5YKw==</value>
+      <record>false</record>
+    </staticBinding>
+    <userInputBinding id="89df047c-07b2-4325-86ae-2fa9402ec2ce">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralFlowPath</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="804891ea-f816-46b4-9ab5-1c45fbcce5de">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>centralFlowLaunchWaitForFlow</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="22870b55-80e2-4fc4-9d64-93e5e8367639">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>runName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f66c7c5d-2183-4df8-9388-6ceebf84ca86">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>inputs</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="2f4b114e-20ef-4161-9087-ad6e51704e74">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>values</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="9336dc9c-03f2-4081-a78a-f9c23c4f9c40">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>,</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="50b5b51d-9680-47a4-b218-f2fbe1d61db8">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>socketTimeout</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>0</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="7cfca669-ddc3-4013-a6b6-99a2de8c0193">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>logLevel</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>INFO</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="8fc8685a-70f6-4e41-852c-749a7ccaa722">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>waitingTime</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value></value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="3874fc52-1e32-436d-82f4-968baa9fd591">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="fdb7c5b8-d961-4e9b-9fe8-1ab511cf2e06">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="f98d3b4a-faae-4661-8043-1659363b4ec0">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>0</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="db59434b-e5d7-4ccd-8a73-ce8d51dd75d7">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="466f4013-2b08-472d-a2a0-2b7e893cd897">
+          <annotation></annotation>
+          <name>returnCode</name>
+          <fieldName>returnCode</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="7dccf8f7-d87a-4eef-bedb-c9804f60c1df">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>-1</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="500df22c-59fa-49ec-a123-133abe89c939">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>result</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6e31898b-1976-4e01-b157-ca398fa7874d">
+    <baseIcon>document_text.png</baseIcon>
+    <basePath>/Operating System/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="bdb09191-cab8-4899-a1f7-15bf96193dee">
+        <baseIcon>iterate.png</baseIcon>
+        <basePath>/Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>17eddb97-6bc1-4c77-b747-c73f954fdd61</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>

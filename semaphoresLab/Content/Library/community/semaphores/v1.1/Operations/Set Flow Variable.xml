@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="e2818d93-3118-4a9c-9da0-86f151c7f3ea">
+  <descriptionCdata><![CDATA[e2818d93-3118-4a9c-9da0-86f151c7f3ea.16da2c0b-224c-4567-a55c-93ac3e8a761c.prompt=Value\:
+e2818d93-3118-4a9c-9da0-86f151c7f3ea.34250217-d44a-4116-899b-4a58494ad140.prompt=Key Name\:
+e2818d93-3118-4a9c-9da0-86f151c7f3ea.description=<pre>Adds a flow variable into the local context (available to itself and child flows only)\n\nInput Parameters\:\nkeyName - the name of the flow variable to use\nmyValue - the value to assign the flow variable\n\nResponses\:\nsuccess - assigned the flow variable\n\nScriptlet Example\:\n[$scriptletContext putGlobal\: $keyName, $myValue];</pre>
+]]></descriptionCdata>
+  <annotation>e2818d93-3118-4a9c-9da0-86f151c7f3ea.description</annotation>
+  <name>Set Flow Variable</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="34250217-d44a-4116-899b-4a58494ad140">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2818d93-3118-4a9c-9da0-86f151c7f3ea.34250217-d44a-4116-899b-4a58494ad140.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="16da2c0b-224c-4567-a55c-93ac3e8a761c">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>myValue</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>e2818d93-3118-4a9c-9da0-86f151c7f3ea.16da2c0b-224c-4567-a55c-93ac3e8a761c.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="6403b14e-a66d-4936-9899-fb81d66bab88">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${keyName}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="f228cb79-e53b-41b9-a3c4-4ba3ac4205ed">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${myValue}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="9302a295-9c7e-4eba-8e06-315d14aa3d46">
+    <annotation></annotation>
+    <name>Operation Set Flow Variable (7fe12fa3-f2ac-401d-941a-cab00b41a87e)</name>
+    <script>scriptletContext.put(keyName, myValue);</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="c556fe0a-42b1-464f-a64b-2f4783ab1be3">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="90bdf0e4-018b-4743-8abe-bcfe26a2200b">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>Field_2</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="6352462e-79da-4bd3-91b3-cff2b275b718">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="07b7d9ec-440f-411c-8bbe-36c96cdcc2a8">
+        <baseIcon>edit.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>

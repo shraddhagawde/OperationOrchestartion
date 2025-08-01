@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="198ad4f7-3e67-4a68-98ef-799e787060fa">
+  <descriptionCdata><![CDATA[198ad4f7-3e67-4a68-98ef-799e787060fa.01481b33-fade-44e6-b253-b34c2952d9c1.prompt=Number of seconds to sleep\:
+198ad4f7-3e67-4a68-98ef-799e787060fa.description=<pre>Sleeps for the number of seconds specified in the input.\n\nInputs\:\nseconds - The number of seconds to sleep.\n\nResponses\:\nsuccess - Slept for the number of seconds given as input.\nfailure - Was unable to sleep for some reason.\n</pre>
+]]></descriptionCdata>
+  <annotation>198ad4f7-3e67-4a68-98ef-799e787060fa.description</annotation>
+  <name>Sleep</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="01481b33-fade-44e6-b253-b34c2952d9c1">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>seconds</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>198ad4f7-3e67-4a68-98ef-799e787060fa.01481b33-fade-44e6-b253-b34c2952d9c1.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+  </inputs>
+  <possibleResponses>
+    <opResponse id="3b3b45c6-05af-4dd1-a208-353748145a92">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules>
+        <expression id="51e46ea4-e711-4885-b336-f539a7d5d909">
+          <annotation></annotation>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="200b2f38-280e-4576-b5ab-d60fd9a2b323">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>success</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+    <opResponse id="ae62988c-eb06-4a07-9b87-738c00bd2924">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules>
+        <expression id="18df448b-8116-4d89-83c5-9e66e8d42d8c">
+          <annotation></annotation>
+          <name>result</name>
+          <fieldName>result</fieldName>
+          <sourceType>RAWRESULT</sourceType>
+          <compare id="4a13aa9c-55ec-4eb6-ab02-ff6f74a259ff">
+            <annotation></annotation>
+            <name>Config Item</name>
+            <text>failure</text>
+            <matchType>=</matchType>
+          </compare>
+          <filters/>
+        </expression>
+      </matchRules>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="b8bbf339-a47f-4a3c-8d07-e4d2d55c4af6">
+    <annotation></annotation>
+    <name>result</name>
+    <fieldName>resultString</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="4a7ccb24-e917-489c-83da-3b998ec49bf9">
+    <baseIcon>hourglass.png</baseIcon>
+    <basePath>Utilities</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>d1bbf441-824a-450e-afae-2ddec0e0f35e</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>

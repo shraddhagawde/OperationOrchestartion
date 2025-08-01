@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="61cdd029-430e-4fde-9c78-ae58a831df1f">
+  <descriptionCdata><![CDATA[61cdd029-430e-4fde-9c78-ae58a831df1f.942b79dd-5951-4ace-8501-67eb671bfe9f.prompt=Value\:
+61cdd029-430e-4fde-9c78-ae58a831df1f.bfdba388-084b-4e36-b821-99ad8e0f5141.prompt=Key Name\:
+61cdd029-430e-4fde-9c78-ae58a831df1f.description=<pre>Adds flow variables into the local context (available to itself and child flows only)\n\nInput Parameters\:\nkeyNames - the names of the flow variables to use\nmyValues - the values to assign the flow variables\ndelimiter - a delimiter separating values and keys.\n\nResponses\:\nsuccess - assigned the flow variable\n\nScriptlet Example\:\n[$scriptletContext putGlobal\: $keyName, $myValue];</pre>
+]]></descriptionCdata>
+  <annotation>61cdd029-430e-4fde-9c78-ae58a831df1f.description</annotation>
+  <name>Set Flow Variables</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="bfdba388-084b-4e36-b821-99ad8e0f5141">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyNames</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>61cdd029-430e-4fde-9c78-ae58a831df1f.bfdba388-084b-4e36-b821-99ad8e0f5141.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="942b79dd-5951-4ace-8501-67eb671bfe9f">
+      <annotation></annotation>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>myValues</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt>61cdd029-430e-4fde-9c78-ae58a831df1f.942b79dd-5951-4ace-8501-67eb671bfe9f.prompt</prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <userInputBinding id="0ee2e671-da35-40bd-8d75-e2b42c65f4f6">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>delimiter</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="554e68b4-36a6-416e-89da-6db063e93cff">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_1</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${keyNames}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="0db921a2-3cd9-4054-af2c-a514325fe344">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_2</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${myValues}</value>
+      <record>false</record>
+    </staticBinding>
+    <staticBinding id="e3ab829c-4adc-476e-a4ad-26fa4d3c8eac">
+      <annotation></annotation>
+      <toContextKey></toContextKey>
+      <fromContextKey></fromContextKey>
+      <assignFromContext>false</assignFromContext>
+      <assignToContext>false</assignToContext>
+      <inputType>STRING</inputType>
+      <recordKey></recordKey>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>Field_3</inputSymbol>
+      <listDelimiter></listDelimiter>
+      <value>${delimiter}</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="bafc2295-4126-4a72-9c93-3a7be05b65be">
+    <annotation></annotation>
+    <name>Operation Set Flow Variables (b7812521-9de9-4306-9f33-2551d2180e6e)</name>
+    <script>var keys = keyNames.split(delimiter);
+var vals = myValues.split(delimiter);
+var oneval = vals == null || vals.length &lt; keys.length;
+for (count = 0;count &lt; keys.length;count++){
+	if (oneval)
+		scriptletContext.put(keys[count], myValues);
+	else
+		scriptletContext.put(keys[count], vals[count]);		
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="8dddf7d5-40b4-4b35-85dc-f9c2ac9bdbb9">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>true</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="bf52cbf7-474f-4623-ab7d-1b74fd4e8dd5">
+    <annotation></annotation>
+    <name></name>
+    <fieldName>Field_2</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="5167f582-c62b-4849-9f36-ce2e0b3e6ac9">
+    <baseIcon>jar.png</baseIcon>
+    <basePath>Others/</basePath>
+    <readOnly>false</readOnly>
+    <layers>
+      <iconSpec id="43094ff6-5deb-4969-a132-d62670239688">
+        <baseIcon>edit.png</baseIcon>
+        <basePath>Annotations/</basePath>
+        <readOnly>false</readOnly>
+        <layers/>
+      </iconSpec>
+    </layers>
+  </iconSpec>
+  <opRef>
+    <refId>ddd79f22-8b1e-4605-88d5-d912bb2da2b9</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>

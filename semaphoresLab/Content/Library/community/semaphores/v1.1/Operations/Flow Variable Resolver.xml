@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<operation id="2da3d748-5729-4d35-a49a-74f5d4185182">
+  <descriptionCdata><![CDATA[2da3d748-5729-4d35-a49a-74f5d4185182.description=<pre>Resolves any flow variables in a String. This is useful if you have an input to a flow that references undefined flow variables, and define them later. Pass in the flow variable key name of the string that contains unresolved flow variables.\n\nInputs\:\nkeyName - The name of the flow variable that should have its value reresolved.\neraseUnresolved - A boolean value. If true, any unresolved flow variable references will be replaced by nothing (IE ${variable} disappears).\n\nResponses\:\nsuccess - One or more flow variables were replaced, or could not be resolved and were erased from the string.\nfailure - No flow variables were referenced in the string.\n\nReturns\:\nThe resulting string having had flow variable references replaced with the resolved values.</pre>
+]]></descriptionCdata>
+  <annotation>2da3d748-5729-4d35-a49a-74f5d4185182.description</annotation>
+  <name>Flow Variable Resolver</name>
+  <categories/>
+  <inputs>
+    <userInputBinding id="29cbb0dc-8b83-4722-87f5-d352b471249f">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>true</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>keyName</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <record>false</record>
+      <prompt></prompt>
+      <isMultiSelect>false</isMultiSelect>
+      <sourceDelimiter>|</sourceDelimiter>
+    </userInputBinding>
+    <staticBinding id="383503cd-cf54-4a9e-bcaf-a2bd62757506">
+      <annotation></annotation>
+      <assignFromContext>true</assignFromContext>
+      <assignToContext>true</assignToContext>
+      <inputType>STRING</inputType>
+      <isList>false</isList>
+      <required>false</required>
+      <isPersisted>true</isPersisted>
+      <inputSymbol>eraseUnresolved</inputSymbol>
+      <listDelimiter>,</listDelimiter>
+      <value>false</value>
+      <record>false</record>
+    </staticBinding>
+  </inputs>
+  <scriptlet id="c449332a-7b88-4280-88a8-b34047540cb2">
+    <annotation></annotation>
+    <name>Operation Flow Variable Resolver (6c907a2f-9f99-4513-94ff-7338f35161b8)</name>
+    <script>try {
+templateString = scriptletContext.get(keyName);
+initialString = templateString; 
+unrezolvedVar = [];
+unrezolvedIndex = [];
+
+start = templateString .indexOf(&quot;${&quot;);
+end = templateString .indexOf(&quot;}&quot;);
+varName = &quot;&quot;
+
+while (start &gt;= 0){
+    varName = templateString.substring(start+2, end);
+    toReplace = &quot;${&quot;+varName+&quot;}&quot;;
+    replaceWith = scriptletContext.get(varName);
+               
+    if (typeof(replaceWith) == &quot;undefined&quot; || replaceWith == null || replaceWith == &quot;&quot;){
+        templateString = templateString.replace(toReplace, &quot;&quot;);
+        unrezolvedVar.push(toReplace);
+        unrezolvedIndex.push(start);
+    }else{
+        templateString = templateString.replace(toReplace, replaceWith);
+    }
+    
+    start = templateString.indexOf(&quot;${&quot;);
+    end = templateString.indexOf(&quot;}&quot;);
+}
+
+if (typeof(eraseUnresolved) == &quot;undefined&quot; || eraseUnresolved == null || eraseUnresolved == &quot;&quot; || eraseUnresolved.toString() == &quot;false&quot; ){
+    offset = 0;
+    for (i=0; i&lt;unrezolvedVar.length; i++){
+        templateString =  new java.lang.StringBuffer(templateString).insert(offset + unrezolvedIndex[i], unrezolvedVar[i]).toString();                                       
+        offset = parseInt(offset + unrezolvedVar[i].length);
+    }
+}
+
+scriptletResponse = &quot;success&quot;;
+scriptletResult = templateString;
+
+if (templateString == initialString){
+    scriptletResponse = &quot;failure&quot;;
+}}
+catch (e){
+    scriptletResponse = &quot;failure&quot;;
+    scriptletResult = &quot;&quot;+e;
+}</script>
+    <type>RHINO</type>
+  </scriptlet>
+  <possibleResponses>
+    <opResponse id="62f4396b-88db-4ce2-b0d2-c4e006ff13b1">
+      <annotation></annotation>
+      <name>success</name>
+      <isDefault>false</isDefault>
+      <onFailure>false</onFailure>
+      <type>RESOLVED</type>
+      <matchRules/>
+    </opResponse>
+    <opResponse id="2877925f-51f2-4f2f-9fc4-c656254516ff">
+      <annotation></annotation>
+      <name>failure</name>
+      <isDefault>true</isDefault>
+      <onFailure>true</onFailure>
+      <type>ERROR</type>
+      <matchRules/>
+    </opResponse>
+  </possibleResponses>
+  <availableResultExpressions/>
+  <resultExpression id="6085c170-f4ef-4a72-974f-13c27dd85238">
+    <annotation></annotation>
+    <name>returnResult</name>
+    <fieldName>returnResult</fieldName>
+    <sourceType>RAWRESULT</sourceType>
+    <filters/>
+  </resultExpression>
+  <iconSpec id="1031c1b6-4342-42ac-aa6d-d4118c4693fd">
+    <baseIcon>compare.png</baseIcon>
+    <basePath>Utilities</basePath>
+    <readOnly>false</readOnly>
+    <layers/>
+  </iconSpec>
+  <opRef>
+    <refId>aedbea49-e28b-4ed5-a64d-25681e3c8196</refId>
+  </opRef>
+  <fieldValues/>
+  <groupAliasRef>
+    <refId>5233030c-af46-432b-a682-b326ca6bf2ae</refId>
+    <refName>RAS_Operator_Path</refName>
+  </groupAliasRef>
+</operation>
