@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selectionList id="94f4d3d1-b92a-433e-8194-c80ab7641151">
+  <descriptionCdata><![CDATA[]]></descriptionCdata>
+  <annotation></annotation>
+  <name>Responses-all</name>
+  <storage>
+    <string>success</string>
+    <string>diagnosed</string>
+    <string>no action</string>
+    <string>failure</string>
+  </storage>
+</selectionList>
